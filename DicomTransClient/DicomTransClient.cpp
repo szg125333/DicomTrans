@@ -11,6 +11,18 @@
 #include <csignal>
 #include <atomic>
 #include <fstream>
+#include <stdexcept>
+
+namespace fs = std::filesystem;
+
+#ifdef _WIN32
+#include <windows.h>
+#include <cstdlib> // _pgmptr
+#else
+#include <unistd.h> // readlink
+#endif
+#include <zmq.h>
+
 
 std::string patientId = "HFP";
 std::string studyUid = "1.2.246.352.221.5319850929801793938.489836017520611990";
@@ -18,7 +30,39 @@ std::string seriesUid = "1.2.246.352.221.5381620381804819935.1230467218611155295
 std::filesystem::path basePath = "Storage";
 std::filesystem::path seriesPath = basePath / patientId / studyUid / seriesUid;
 
+/**
+ * @brief 跨平台获取可执行程序所在的目录
+ * @return exe所在目录的绝对路径
+ * @throw std::runtime_error 获取失败时抛出异常
+ */
+fs::path getExeDirectory() {
+    fs::path exePath;
+
+#ifdef _WIN32
+    // Windows平台：通过GetModuleFileName获取exe完整路径
+    // 比_pgmptr更可靠，避免某些编译环境下_pgmptr失效
+    char buffer[MAX_PATH] = { 0 };
+    GetModuleFileNameA(NULL, buffer, MAX_PATH);
+    exePath = fs::canonical(buffer);
+#else
+    // Linux平台：通过/proc/self/exe获取exe路径
+    char buffer[PATH_MAX] = { 0 };
+    ssize_t len = readlink("/proc/self/exe", buffer, sizeof(buffer) - 1);
+    if (len == -1) {
+        throw std::runtime_error("获取Linux可执行程序路径失败");
+    }
+    exePath = fs::canonical(std::string(buffer, len));
+#endif
+
+    // 返回exe所在的目录（去掉exe文件名）
+    return exePath.parent_path();
+}
+
 int main() {
+
+    fs::path exeDir = getExeDirectory();
+    std::cout << "可执行程序所在目录：" << exeDir << std::endl;
+
     // 创建 ZMQ 上下文和 REQ 套接字
     void* ctx = zmq_ctx_new();
     void* socket = zmq_socket(ctx, ZMQ_REQ);
@@ -28,7 +72,16 @@ int main() {
 
     auto str = std::make_unique<QuerySeriesRequest>("HFP",
         "1.2.246.352.221.5319850929801793938.489836017520611990", "1.2.246.352.221.5381620381804819935.12304672186111552956");
-    std::filesystem::create_directories(seriesPath);
+    fs::path seriesPath = exeDir / "Storage" / patientId / studyUid / seriesUid;
+
+    // 创建多级目录
+    if (!fs::exists(seriesPath)) {
+        fs::create_directories(seriesPath);
+        std::cout << "存储目录已创建：" << seriesPath << std::endl;
+    }
+    else {
+        std::cout << "存储目录已存在：" << seriesPath << std::endl;
+    }
 
     //Json::StreamWriterBuilder builder;
     //std::string jsonStr = Json::writeString(builder, str->toJson());
