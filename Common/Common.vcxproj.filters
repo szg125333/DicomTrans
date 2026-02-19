@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{3e8dff51-a944-4b37-aed3-d10eaf1ac2e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\core">
+      <UniqueIdentifier>{03f23a2b-191d-426f-ae34-9e094c59eac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\factory">
+      <UniqueIdentifier>{da3cc6e7-cf95-4c95-b269-f6b674fa8f65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\messages">
+      <UniqueIdentifier>{21cfd972-1cdc-49e7-aaf2-484df27dd079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Worker">
+      <UniqueIdentifier>{9fbaa28a-12cd-4e9c-8b36-860af7b32462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{90b77eeb-71f1-4d5f-b0ee-f9545d85a521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{41c3be9f-cda9-477b-b481-4e9e8b010e83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\messages">
+      <UniqueIdentifier>{08806486-b792-4c51-8111-97fc87e2ad56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\factory">
+      <UniqueIdentifier>{065f54dc-069e-43d8-91d4-d6d7144a5488}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Worker">
+      <UniqueIdentifier>{1f9a6588-09ff-4fbb-9941-fb17a93251b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\messages\request">
+      <UniqueIdentifier>{eb48588d-881d-4fdc-bbe1-f3a66980ae39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\messages\response">
+      <UniqueIdentifier>{03a78c54-f6ac-4b51-a780-62d4ac3f01b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\messages\request">
+      <UniqueIdentifier>{e2b8bb84-96c5-4062-a8dc-4911174426f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\messages\response">
+      <UniqueIdentifier>{0e9e89cf-ec93-4609-bf34-5df5a8f2b979}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\core\IMessageBuilder.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\IMessage.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\TemplateMessageBuilder.h">
+      <Filter>include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\factory\MessageBuilderFactory.h">
+      <Filter>include\factory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\messages\request\QuerySeriesRequest.h">
+      <Filter>include\messages\request</Filter>
+    </ClInclude>
+    <ClInclude Include="include\messages\request\ImmutableFirstTypeRequest.h">
+      <Filter>include\messages\request</Filter>
+    </ClInclude>
+    <ClInclude Include="include\messages\response\ImmutableFirstTypeResponse.h">
+      <Filter>include\messages\response</Filter>
+    </ClInclude>
+    <ClInclude Include="include\messages\FileMeta.h">
+      <Filter>include\messages</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Worker\NewRequestWorker.h">
+      <Filter>include\Worker</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Worker\NewNotifyWorker.h">
+      <Filter>include\Worker</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Worker\RequestIdCreator.h">
+      <Filter>include\Worker</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ZmqAddresses.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\factory\MessageBuilderFactory.cpp">
+      <Filter>src\factory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\messages\request\QuerySeriesRequest.cpp">
+      <Filter>src\messages\request</Filter>
+    </ClCompile>
+    <ClCompile Include="src\messages\request\ImmutableFirstTypeRequest.cpp">
+      <Filter>src\messages\request</Filter>
+    </ClCompile>
+    <ClCompile Include="src\messages\response\ImmutableFirstTypeResponse.cpp">
+      <Filter>src\messages\response</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worker\NewRequestWorker.cpp">
+      <Filter>src\Worker</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worker\NewNotifyWorker.cpp">
+      <Filter>src\Worker</Filter>
+    </ClCompile>
+    <ClCompile Include="src\messages\FileMeta.cpp">
+      <Filter>src\messages</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
