@@ -1,7 +1,11 @@
 ﻿#include "../include/messages/response/ImmutableFirstTypeResponse.h"
 #include "../include/core/TemplateMessageBuilder.h"
 #include "../include/factory/MessageBuilderFactory.h"
+#ifdef _WIN32
 #include <json/json.h>
+#else
+#include <jsoncpp/json/json.h>
+#endif
 #include <memory>
 #include <stdexcept>
 

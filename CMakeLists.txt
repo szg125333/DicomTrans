@@ -3,8 +3,6 @@ project(DicomTrans)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# 查找 ZeroMQ
-find_package(zmq REQUIRED)
 
 # 添加子目录
 add_subdirectory(Common)

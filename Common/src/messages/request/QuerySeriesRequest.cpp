@@ -1,6 +1,12 @@
 // src/messages/request/QuerySeriesRequest.cpp
 #include "../include/messages/request/QuerySeriesRequest.h"
+
+#ifdef _WIN32
 #include <json/json.h>
+#else
+#include <jsoncpp/json/json.h>
+#endif
+
 #include "../include/core/TemplateMessageBuilder.h"
 #include "../include/factory/MessageBuilderFactory.h"
 #include <memory>

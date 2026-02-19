@@ -5,12 +5,17 @@
 #include "messages/FileMeta.h"
 #include "Worker/NewNotifyWorker.h"
 #include "Worker/NewRequestWorker.h"
-#include <json/json.h>
 #include <iostream>
 #include <filesystem>
 #include <csignal>
 #include <atomic>
 #include <fstream>
+
+#ifdef _WIN32
+#include <json/json.h>
+#else
+#include <jsoncpp/json/json.h>
+#endif
 
 // 全局运行标志
 std::atomic<bool> running(true);

@@ -1,8 +1,11 @@
 #pragma once
 #include "../core/IMessage.h"
 #include <string>
+#ifdef _WIN32
 #include <json/json.h>
-
+#else
+#include <jsoncpp/json/json.h>
+#endif
 class FileMeta : public IMessage {
 public:
     static constexpr const char* TYPE_NAME = "FileMeta";

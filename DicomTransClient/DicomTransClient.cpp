@@ -5,7 +5,6 @@
 #include "messages/FileMeta.h"
 #include "Worker/NewNotifyWorker.h"
 #include "Worker/NewRequestWorker.h"
-#include <json/json.h>
 #include <iostream>
 #include <filesystem>
 #include <csignal>
@@ -18,11 +17,15 @@ namespace fs = std::filesystem;
 #ifdef _WIN32
 #include <windows.h>
 #include <cstdlib> // _pgmptr
+#include <json/json.h>
 #else
 #include <unistd.h> // readlink
+#include <jsoncpp/json/json.h>
+
 #endif
 #include <zmq.h>
 
+#define MAX_LENGTH          260
 
 std::string patientId = "HFP";
 std::string studyUid = "1.2.246.352.221.5319850929801793938.489836017520611990";
@@ -41,12 +44,12 @@ fs::path getExeDirectory() {
 #ifdef _WIN32
     // Windows平台：通过GetModuleFileName获取exe完整路径
     // 比_pgmptr更可靠，避免某些编译环境下_pgmptr失效
-    char buffer[MAX_PATH] = { 0 };
-    GetModuleFileNameA(NULL, buffer, MAX_PATH);
+    char buffer[MAX_LENGTH] = { 0 };
+    GetModuleFileNameA(NULL, buffer, MAX_LENGTH);
     exePath = fs::canonical(buffer);
 #else
     // Linux平台：通过/proc/self/exe获取exe路径
-    char buffer[PATH_MAX] = { 0 };
+    char buffer[MAX_LENGTH] = { 0 };
     ssize_t len = readlink("/proc/self/exe", buffer, sizeof(buffer) - 1);
     if (len == -1) {
         throw std::runtime_error("获取Linux可执行程序路径失败");

@@ -7,8 +7,11 @@
 #include <iostream>
 #include <chrono>
 #include <cstring>
+#ifdef _WIN32
 #include <json/json.h>
-
+#else
+#include <jsoncpp/json/json.h>
+#endif
 // 静态成员定义
 std::unique_ptr<IMessage> NewRequestWorker::pendingRequest_ = nullptr;
 std::atomic<bool> NewRequestWorker::hasPendingRequest_{ false };

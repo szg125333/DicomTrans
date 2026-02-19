@@ -1,6 +1,10 @@
 #pragma once
 #include "IMessage.h"
+#ifdef _WIN32
 #include <json/json.h>
+#else
+#include <jsoncpp/json/json.h>
+#endif
 #include <memory>
 
 class IMessageBuilder {
